@@ -1,0 +1,27 @@
+﻿.main-container {
+    margin-top:75px;
+}
+
+.inline-header {
+    position: relative;
+}
+
+.inline-header h1,
+.inline-header h2,
+.inline-header h3,
+.inline-header h4,
+.inline-header h5,
+.inline-header h6
+ {
+    width: 200px;
+}
+
+.inline-header button {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.timer-functions {
+    text-align: center;
+}

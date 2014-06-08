@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Systematize", "Systematize\Systematize.csproj", "{31E977CE-5B7D-40C8-B48E-ED1D6057FEC3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Systematize.ServiceInterface", "Systematize.ServiceInterface\Systematize.ServiceInterface.csproj", "{A2784D51-BCF3-4DFD-AB27-6D2CEF784789}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Systematize.ServiceModel", "Systematize.ServiceModel\Systematize.ServiceModel.csproj", "{92AAA5A2-86A9-4971-9079-968A3DE7FC9B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{31E977CE-5B7D-40C8-B48E-ED1D6057FEC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31E977CE-5B7D-40C8-B48E-ED1D6057FEC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31E977CE-5B7D-40C8-B48E-ED1D6057FEC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31E977CE-5B7D-40C8-B48E-ED1D6057FEC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2784D51-BCF3-4DFD-AB27-6D2CEF784789}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2784D51-BCF3-4DFD-AB27-6D2CEF784789}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2784D51-BCF3-4DFD-AB27-6D2CEF784789}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2784D51-BCF3-4DFD-AB27-6D2CEF784789}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92AAA5A2-86A9-4971-9079-968A3DE7FC9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92AAA5A2-86A9-4971-9079-968A3DE7FC9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92AAA5A2-86A9-4971-9079-968A3DE7FC9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92AAA5A2-86A9-4971-9079-968A3DE7FC9B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

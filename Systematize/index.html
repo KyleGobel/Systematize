@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="systematize">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Systematize - Time Blocking your Project Management</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="assets/css/styles.css" rel="stylesheet" />
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
+    <script src="core.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="/assets/js/vendor/html5shiv.js"></script>
+      <script src="/assets/js/vendor/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body ng-controller="mainController">
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Systematize</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+
+                    <li><a href="#about">Notes</a></li>
+                    <li><a href="#contact">Calendar</a></li>
+                </ul>
+                <ul class="nav navbar-nav pull-right">
+                    <li><a href="#quick-note"><span class="glyphicon glyphicon-plus"></span> Quick Note</a></li>
+                    <li class="dropdown">
+                        <a href="#" id="drop2" role="button" class="dropdown-toggle active" data-toggle="dropdown"><span class="glyphicon glyphicon-list"></span> Select a Journal<b class="caret"></b></a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="drop2" ng-show="journals.length <= 0">
+                            <li role="presentation"><a role="menuitem" tabindex="-1" data-toggle="modal" href="#addJournal"><span class="glyphicon glyphicon-plus"></span> No Journals! Add One!</a></li>
+                        </ul>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="drop2" ng-show="journals.length > 0" >
+                            <li role="presentation" ng-repeat="journal in journals">
+                                <a role="menuitem" tabindex="-1" href="javascript:void()" >{{journal.name}}</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" data-toggle="modal" href="#addJournal"><span class="glyphicon glyphicon-plus"></span> Add New Journal</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </div>
+
+    <div class="main-container container">
+<ul class="nav nav-pills">
+    <li><a href="#"><span class="glyphicon glyphicon-plus"></span>  Add Session</a></li>
+    <li><a href="#"><span class="glyphicon glyphicon-ok"></span>  Completed Sessions</a></li>
+    <li><a href="#"><span class="glyphicon glyphicon-list-alt"></span>  Open Tasks</a></li>
+</ul>
+
+<div>
+    <h3>Tasks not finished from previous sessions</h3>
+    <table class="table table-bordered table-striped table-responsive">
+        <thead>
+            <tr>
+                <th class="text-center"><span class="glyphicon glyphicon-unchecked"></span></th>
+                <th>Task</th>
+                <th>Session</th>
+                <th class="text-center">View</th>
+                <th class="text-center">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="session in sessions">
+                <td class="text-center"><span id="{{session._id}}" class="glyphicon glyphicon-unchecked"></span></td>
+                <td>Complete the task app</td>
+                <td>{{session.name}} - {{session.createdAt | date: 'MM/dd/yyyy hh:mm a' }}</td>
+                <td class="text-center">
+                    <a href="#" title="View Session"><span class="glyphicon glyphicon-eye-open"></span></a>
+                </td>
+                <td class="text-center">
+                    <a href="#" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="pull-right">
+        <button type="button" class="btn btn-link btn-sm"><span class="glyphicon glyphicon-plus"></span> Add Selected To New Session</button>
+    </div>
+</div>
+<br />
+<div>
+    <h2>Active Session</h2>
+    <h4><span class="glyphicon glyphicon-edit"></span> 08/29/2013 12:38 AM </h4>
+    <div class="row">
+        <div class="col-md-8"><!-- Tasks Table -->
+            <div class="inline-header">
+                    <h3>Tasks</h3>
+                    <button type="button" class="btn btn-link pull-right" ng-click="appendTaskRow()"><span class="glyphicon glyphicon-plus"></span> Add Task</button>
+            </div>
+            <form>
+                <table id="task-table" class="table table-bordered table-striped table-responsive">
+                    <thead>
+                        <tr>
+                            <th class="text-center"><span class="glyphicon glyphicon-unchecked"></span></th>
+                            <th style="width: 380px;">Task</th>
+                            <th class="text-center">Edit</th>
+                            <th class="text-center">Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-show="!tasks.length && !showTaskAddRow">
+                            <td colspan="4">No tasks! Add one, bitch.</td>
+                        </tr>
+                        <tr id='newTaskRowTemplate' ng-show="showTaskAddRow">
+                            <td></td>
+                            <td style='text-align: center'><input type='text' focus-on="showTaskAddFocus" placeholder='New Task...' style='width: 100%' class='form-control' ng-model='formData.text'>
+                            <td style='text-align: center'>
+                                <button type='button' ng-click='createTask()' class='btn btn-sm btn-success'><span class='glyphicon glyphicon-save'></span>&nbsp;Save</button>
+                            </td>
+                            <td style='text-align: center'><button type='button' class='btn btn-sm btn-danger' ng-click='cancelTaskAdd()'><span class='glyphicon glyphicon-remove'></span></button>                                     </td>
+                        </tr>
+                        <tr ng-repeat="task in tasks">
+                            <td class="text-center"><span id="{{task._id}}" class="glyphicon glyphicon-unchecked"></span></td>
+                            <td id="task-value-{{task._id}}">{{task.text}}</td>
+                            <td class="text-center"><a href="javascript:void();" ng-click="editTask(task._id)" title="Edit Task"><span class="glyphicon glyphicon-edit"></span></a></td>
+                            <td class="text-center"><a href="javascript:void();" ng-click="deleteTask(task._id)" title="Delete Task"><span class="glyphicon glyphicon-remove"></span></a></td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </form>
+        </div><!-- /.Tasks Table -->
+        <div class="col-md-4">
+            <h3>Timer</h3>
+            <div style="text-align: center;">
+                <h1>00:17:59</h1>
+            </div>
+            <div class="progress">
+                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                    <span class="sr-only">60% Complete</span>
+                </div>
+            </div>
+            <div class="timer-functions">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-default" disabled="disabled" title="Start Timer (running)"><span class="glyphicon glyphicon-play"></span></button>
+                  <button type="button" class="btn btn-warning" title="Pause Timer"><span class="glyphicon glyphicon-pause"></span></button>
+                  <button type="button" class="btn btn-danger" title="Abort Timer"><span class="glyphicon glyphicon-stop"></span></button>
+                </div>
+            </div>
+            <h3>Session Stats</h3>
+            <table class="table table-bordered table-responsive">
+                <thead>
+                    <tr style="color: white;">
+                        <th class="text-center success">Completed</th>
+                        <th class="text-center warning">Interrupted</th>
+                        <th class="text-center danger">Abandoned</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-center">2</td>
+                        <td class="text-center">0</td>
+                        <td class="text-center">0</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+        <div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="inline-header">
+                <h3>Notes</h3>
+                <button type="button" class="btn btn-link pull-right"><span class="glyphicon glyphicon-plus"></span> Add Note</button>
+            </div>
+            
+            <table class="table table-bordered table-striped table-responsive">
+                <thead>
+                    <tr>
+                        <th>Note</th>
+                        <th class="text-center">Edit</th>
+                        <th class="text-center">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            First note in the house. Just making this one a really long note as well. I want to see what it will look like with a bunch of text in this area.
+                            This app is really coming together. All I need to do is hook up everything. No big deal right?
+                        </td>
+                        <td class="text-center"><a href="#" title="Edit Task"><span class="glyphicon glyphicon-edit"></span></a></td>
+                        <td class="text-center"><a href="#" title="Delete Task"><span class="glyphicon glyphicon-remove"></span></a></td>
+                    </tr>
+                    <tr>
+                        <td>I only added this one because potato.</td>
+                        <td class="text-center"><a href="#" title="Edit Task"><span class="glyphicon glyphicon-edit"></span></a></td>
+                        <td class="text-center"><a href="#" title="Delete Task"><span class="glyphicon glyphicon-remove"></span></a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="addJournal" tabindex="-1" role="dialog" aria-labelledby="addJournal" aria-hidden="true">
+  <form role="form">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content" ng-show="!showJournalAdded">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Add New Journal</h4>    
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="journalName">Journal Name</label>
+                    <input type="text" class="form-control" id="journalName" placeholder="Journal Name" ng-model="journalData.name">
+                </div>
+                <div class="form-group">
+                    <label for="journalDescription">Journal Description</label>
+                    <textarea class="form-control" id="journalDescription" rows="10" placeholder="Description..." ng-model="journalData.description"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" id="createJournal" class="btn btn-primary" data-loading-text="Creating Journal..." ng-click="createJournal()">Create Journal</button>
+            </div>
+        </div>
+        <div class="modal-content" ng-show="showJournalAdded">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">New Journal Added!</h4>
+            </div>
+            <div class="modal-body">
+                <p>Your Journal: <strong>{{addedJournal}}</strong> has been created!</p>
+                <br />
+                <p><italic>*this window will automatically close after 3 seconds.</italic></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+      </div>
+  </form>
+</div>
+
+    </div>
+
+
+    <!-- Core JavaScript
+    ================================================== -->
+    <script src="/assets/js/vendor/jquery.min.js"></script>
+    <script src="/assets/js/vendor/require.js"></script>
+</body>
+</html>
