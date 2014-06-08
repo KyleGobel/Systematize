@@ -17,7 +17,7 @@ function mainController($scope, $http) {
     $scope.selectedJournalId = 0;
     $scope.SelectedJournalName = "";
     
-    $http.get('/api/journals/')
+    $http.get('/journals/')
         .success(function(data) {
             $scope.journals = data;
         })
@@ -25,7 +25,7 @@ function mainController($scope, $http) {
             console.error(err);
         });
     
-    $http.get('/api/tasks/')
+    $http.get('/tasks/')
         .success(function(data) {
             $scope.tasks = data;
         })
@@ -33,7 +33,7 @@ function mainController($scope, $http) {
             console.error(err);
         });
     
-    $http.get('/api/sessions/')
+    $http.get('/sessions/1')
         .success(function(data) {
             $scope.sessions = data;
         })
@@ -44,7 +44,7 @@ function mainController($scope, $http) {
     $scope.createJournal = function() {
         var btn = $('#createJournal');
         btn.button('loading');
-        $http.post('/api/journals/', $scope.journalData)
+        $http.post('/journals/', $scope.journalData)
              .success(function(data) {
                  $scope.addedJournal = $scope.journalData.name;
                  $scope.journalData = {};
@@ -61,7 +61,7 @@ function mainController($scope, $http) {
     };
     
     $scope.selectJournal = function(id) {
-        $http.get('/api/journals/' + id)
+        $http.get('/journals/' + id)
             .success(function(data) {
                 $scope.selectedJournalId = data._id;
                 $scope.selectedJournalName = data.name;
@@ -83,7 +83,7 @@ function mainController($scope, $http) {
     };
     
     $scope.createTask = function() {
-        $http.post('/api/tasks/', $scope.formData)
+        $http.post('/tasks/', $scope.formData)
             .success(function(data) {
                 $scope.formData = {};
                 $scope.tasks = data;
@@ -101,11 +101,11 @@ function mainController($scope, $http) {
         var span = $('span#' + id);
         var td = span.parent();
         var name = td.siblings('#task-value-'+id);
-        name.append('<div><input type="text" id="' + id + '" />
+        name.append('<div><input type="text" id="' + id + '" />');
     };
     
     $scope.deleteTask = function(id) {
-        $http.delete('/api/tasks/' + id)
+        $http.delete('/tasks/' + id)
             .success(function(data) {
                 $scope.tasks = data;
                 console.log(data);

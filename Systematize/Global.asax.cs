@@ -38,11 +38,9 @@ namespace Systematize
             /// <param name="container">The built-in IoC used with ServiceStack.</param>
             public override void Configure(Container container)
             {
-                //Register user-defined REST-ful urls. You can access the service at the url similar to the following.
-                //http://localhost/ServiceStack.Hello/servicestack/hello or http://localhost/ServiceStack.Hello/servicestack/hello/John%20Doe
-                //You can change /servicestack/ to a custom path in the web.config.
-                ServiceStack.Text.JsConfig.EmitCamelCaseNames = true;
+                JsConfig.EmitCamelCaseNames = true;
                 JsConfig.PropertyConvention = PropertyConvention.Lenient;
+                JsConfig.DateHandler = DateHandler.ISO8601;
                 LogManager.LogFactory = new Log4NetFactory();
                 container.RegisterAutoWired<JournalService>();
                 ConfigureAndSeedSqlLiteDataBase(container);
