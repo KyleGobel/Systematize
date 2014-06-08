@@ -1,4 +1,5 @@
-﻿using System.Web.UI;
+﻿using System.Configuration;
+using System.Web.UI;
 using Systematize.ServiceModel.Types;
 using Funq;
 using ServiceStack;
@@ -17,6 +18,7 @@ using ServiceStack.OrmLite;
 using ServiceStack.Text;
 using ServiceStack.Logging.Log4Net;
 using Systematize.ServiceInterface;
+using Systematize.ServiceModel.Configuration;
 
 namespace Systematize
 {
@@ -67,44 +69,11 @@ namespace Systematize
                     db.DropAndCreateTable<SessionNote>();
 
                     //Seed Lists
-                    var journalSeed = new List<Journal>();
-                    var journalNoteSeed = new List<JournalNote>();
-                    var sessionSeed = new List<Session>();
-                    var sessionNoteSeed = new List<SessionNote>();
-                    var taskSeed = new List<Task>();
-
-                    //All Seeds for a "Deerso" Journal and all enclosed objects.
-                    journalSeed.Add(new Journal {Id = 1, Name = "Deerso", Description = "All things Deerso.", CreatedAt = DateTime.Now});
-                    journalNoteSeed.Add(new JournalNote{Id = 1, JournalId = 1, Note = "Need to get Deerso.com published and figure out wtf is wrong with it.", CreatedAt = DateTime.Now});
-                    sessionSeed.Add(
-                        new Session
-                        {
-                            Id = 1, 
-                            JournalId = 1, 
-                            Name = "6/8/2014 - Deerso.com Debugging", 
-                            CreatedAt = DateTime.Now, 
-                            Description = "I hope to get deerso.com finished and published in this session."
-                        });
-                    taskSeed.Add(
-                        new Task
-                        {
-                            Id = 1,
-                            SessionId = 1,
-                            Description = "Publish Deerso.com",
-                            Completed = false,
-                            Effort = 1500,
-                            CompletedPomodoros = 1,
-                            AbandonedPomodoros = 0,
-                            InterruptedPomodoros = 0,
-                            CreatedAt = DateTime.Now
-                        });
-                    sessionNoteSeed.Add(new SessionNote {Id = 1, SessionId = 1, Note = "Dont forget to check on staging before publishing.", CreatedAt = DateTime.Now, TaskId = 1 });
-
-                    db.InsertAll(journalSeed);
-                    db.InsertAll(journalNoteSeed);
-                    db.InsertAll(sessionSeed);
-                    db.InsertAll(taskSeed);
-                    db.InsertAll(sessionNoteSeed);
+                    db.InsertAll(SeedData.JournalSeed);
+                    db.InsertAll(SeedData.JournalNoteSeed);
+                    db.InsertAll(SeedData.SessionSeed);
+                    db.InsertAll(SeedData.TaskSeed);
+                    db.InsertAll(SeedData.SessionNoteSeed);
                 }
             }
         }

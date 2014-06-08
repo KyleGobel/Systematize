@@ -7,6 +7,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Systematize.ServiceInterfac
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Systematize.ServiceModel", "Systematize.ServiceModel\Systematize.ServiceModel.csproj", "{92AAA5A2-86A9-4971-9079-968A3DE7FC9B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Systematize.ServiceTests", "Systematize.ServiceTests\Systematize.ServiceTests.csproj", "{A0D459AC-85DB-493D-A07A-C8D022BCF287}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{17629BD0-C0E5-4773-B71A-7C31A1EC2366}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +32,10 @@ Global
 		{92AAA5A2-86A9-4971-9079-968A3DE7FC9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92AAA5A2-86A9-4971-9079-968A3DE7FC9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92AAA5A2-86A9-4971-9079-968A3DE7FC9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0D459AC-85DB-493D-A07A-C8D022BCF287}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0D459AC-85DB-493D-A07A-C8D022BCF287}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0D459AC-85DB-493D-A07A-C8D022BCF287}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0D459AC-85DB-493D-A07A-C8D022BCF287}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

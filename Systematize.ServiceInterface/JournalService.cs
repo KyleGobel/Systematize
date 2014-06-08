@@ -8,6 +8,7 @@ using ServiceStack.Data;
 using ServiceStack.Logging;
 using Systematize.ServiceModel;
 using ServiceStack.OrmLite;
+using ServiceStack.Text;
 
 namespace Systematize.ServiceInterface
 {
