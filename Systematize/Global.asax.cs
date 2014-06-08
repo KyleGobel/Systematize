@@ -16,6 +16,7 @@ using ServiceStack.MiniProfiler.Data;
 using ServiceStack.OrmLite;
 using ServiceStack.Text;
 using ServiceStack.Logging.Log4Net;
+using Systematize.ServiceInterface;
 
 namespace Systematize
 {
@@ -27,7 +28,7 @@ namespace Systematize
             /// <summary>
             /// Initializes a new instance of your ServiceStack application, with the specified name and assembly containing the services.
             /// </summary>
-            public SystematizeAppHost() : base("Hello Web Services", typeof(HelloService).Assembly) { }
+            public SystematizeAppHost() : base("Hello Web Services", typeof(JournalService).Assembly) { }
  
             /// <summary>
             /// Configure the container with the necessary routes for your ServiceStack application.
@@ -38,14 +39,10 @@ namespace Systematize
                 //Register user-defined REST-ful urls. You can access the service at the url similar to the following.
                 //http://localhost/ServiceStack.Hello/servicestack/hello or http://localhost/ServiceStack.Hello/servicestack/hello/John%20Doe
                 //You can change /servicestack/ to a custom path in the web.config.
-                Routes
-                  .Add<Hello>("/hello")
-                  .Add<Hello>("/hello/{Name}");
-
                 ServiceStack.Text.JsConfig.EmitCamelCaseNames = true;
                 JsConfig.PropertyConvention = PropertyConvention.Lenient;
                 LogManager.LogFactory = new Log4NetFactory();
-
+                container.RegisterAutoWired<JournalService>();
                 ConfigureAndSeedSqlLiteDataBase(container);
 
                 LogManager.GetLogger(typeof(SystematizeAppHost)).Debug("AppHost has started... (way to go copying kgobel)");
@@ -145,25 +142,6 @@ namespace Systematize
         protected void Application_End(object sender, EventArgs e)
         {
 
-        }
-    }
-
-    public class Hello
-    {
-        public string Name { get; set; }
-    }
-
-    public class HelloResponse
-    {
-        public string Result { get; set; }
-    }
-
-    public class HelloService : IService
-    {
-        public object Any(Hello request)
-        {
-            var name = request.Name ?? "John Doe";
-            return new HelloResponse {Result = "Hello, " + name + "!"};
         }
     }
 }
