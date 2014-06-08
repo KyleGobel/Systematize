@@ -20,12 +20,18 @@ namespace Systematize.ServiceModel
         public long Id { get; set; }
     }
 
-    [Route("/journals/{Id{", "PUT")]
+    [Route("/journals/{Id}", "PUT")]
     public class UpdateJournal
     {
         public long Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+    }
+
+    [Route("/journals/{Id}", "DELETE")]
+    public class DeleteJournal
+    {
+        public long Id { get; set; }
     }
 
     public class JournalResponse
