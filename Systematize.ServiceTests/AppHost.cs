@@ -29,6 +29,7 @@ namespace Systematize.ServiceTests
                         });
 
             container.RegisterAutoWired<JournalService>();
+            container.RegisterAutoWired<SessionService>();
             
             using (var db = container.Resolve<IDbConnectionFactory>().Open())
             {
