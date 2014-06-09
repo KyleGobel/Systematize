@@ -1,4 +1,5 @@
 ﻿using System.Configuration;
+using System.IO;
 using System.Web.UI;
 using Systematize.ServiceModel.Types;
 using Funq;
@@ -10,6 +11,7 @@ using System.Reflection;
 using System.Web;
 using System.Web.Security;
 using System.Web.SessionState;
+using ServiceStack.Configuration;
 using ServiceStack.Data;
 using ServiceStack.Logging;
 using ServiceStack.MiniProfiler;
@@ -24,6 +26,16 @@ namespace Systematize
 {
     public class Global : System.Web.HttpApplication
     {
+        public override void Init()
+        {
+            var sensitiveConfig = "~/systematize.txt".MapProjectPath();
+
+            var appSettings = File.Exists(sensitiveConfig)
+                ? (IAppSettings)new TextFileSettings(sensitiveConfig, "~")
+                : new AppSettings();
+
+            base.Init();
+        }
 
         public class SystematizeAppHost : AppHostBase
         {
@@ -78,8 +90,11 @@ namespace Systematize
             }
         }
 
+   
         protected void Application_Start(object sender, EventArgs e)
         {
+            
+
             (new SystematizeAppHost()).Init();
         }
 

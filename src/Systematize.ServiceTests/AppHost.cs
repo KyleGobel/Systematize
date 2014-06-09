@@ -1,22 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using Systematize.ServiceInterface;
 using Systematize.ServiceModel.Configuration;
 using Systematize.ServiceModel.Types;
 using ServiceStack;
+using ServiceStack.Configuration;
 using ServiceStack.Data;
 using ServiceStack.MiniProfiler;
 using ServiceStack.MiniProfiler.Data;
 using ServiceStack.OrmLite;
+using ServiceStack.Testing;
 using Task = Systematize.ServiceModel.Types.Task;
 
 namespace Systematize.ServiceTests
 {
-    public class AppHost : AppHostHttpListenerBase
+    public class AppHost : BasicAppHost
     {
-        public AppHost() : base("Test Systematize", typeof(AppHost).Assembly) { }
+        public AppHost() : base(typeof(JournalService).Assembly) { }
+
+        public override ServiceStackHost Init()
+        {
+            
+            return base.Init();
+        }
 
         public override void Configure(Funq.Container container)
         {
