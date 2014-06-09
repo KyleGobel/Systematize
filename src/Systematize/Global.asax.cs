@@ -93,8 +93,7 @@ namespace Systematize
    
         protected void Application_Start(object sender, EventArgs e)
         {
-            
-
+            Licensing.RegisterLicenseFromFileIfExists("~/license.txt".MapHostAbsolutePath());
             (new SystematizeAppHost()).Init();
         }
 
