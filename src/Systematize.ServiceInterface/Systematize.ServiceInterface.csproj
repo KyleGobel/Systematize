@@ -45,9 +45,6 @@
     <Reference Include="ServiceStack.OrmLite">
       <HintPath>..\packages\ServiceStack.OrmLite.4.0.21\lib\net40\ServiceStack.OrmLite.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.OrmLite.Sqlite.Windows">
-      <HintPath>..\packages\ServiceStack.OrmLite.Sqlite.Windows.4.0.21\lib\net40\ServiceStack.OrmLite.Sqlite.Windows.dll</HintPath>
-    </Reference>
     <Reference Include="ServiceStack.Text">
       <HintPath>..\packages\ServiceStack.Text.4.0.21\lib\net40\ServiceStack.Text.dll</HintPath>
     </Reference>
