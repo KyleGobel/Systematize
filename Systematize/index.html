@@ -122,7 +122,7 @@
                         </tr>
                         <tr id='newTaskRowTemplate' ng-show="showTaskAddRow">
                             <td></td>
-                            <td style='text-align: center'><input type='text' focus-on="showTaskAddFocus" placeholder='New Task...' style='width: 100%' class='form-control' ng-model='formData.text'>
+                            <td style='text-align: center'><input type='text' focus-on="showTaskAddFocus" placeholder='New Task...' style='width: 100%' class='form-control' ng-model='formData.description'>
                             <td style='text-align: center'>
                                 <button type='button' ng-click='createTask()' class='btn btn-sm btn-success'><span class='glyphicon glyphicon-save'></span>&nbsp;Save</button>
                             </td>
@@ -130,7 +130,7 @@
                         </tr>
                         <tr ng-repeat="task in tasks">
                             <td class="text-center"><span id="{{task._id}}" class="glyphicon glyphicon-unchecked"></span></td>
-                            <td id="task-value-{{task._id}}">{{task.text}}</td>
+                            <td id="task-value-{{task._id}}">{{task.description}}</td>
                             <td class="text-center"><a href="javascript:void();" ng-click="editTask(task._id)" title="Edit Task"><span class="glyphicon glyphicon-edit"></span></a></td>
                             <td class="text-center"><a href="javascript:void();" ng-click="deleteTask(task._id)" title="Delete Task"><span class="glyphicon glyphicon-remove"></span></a></td>
                         </tr>

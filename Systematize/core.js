@@ -25,7 +25,7 @@ function mainController($scope, $http) {
             console.error(err);
         });
     
-    $http.get('/tasks/')
+    $http.get('/tasks/1')
         .success(function(data) {
             $scope.tasks = data;
         })
@@ -83,7 +83,7 @@ function mainController($scope, $http) {
     };
     
     $scope.createTask = function() {
-        $http.post('/tasks/', $scope.formData)
+        $http.post('/tasks/1', $scope.formData)
             .success(function(data) {
                 $scope.formData = {};
                 $scope.tasks = data;

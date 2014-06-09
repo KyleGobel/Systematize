@@ -66,6 +66,7 @@
     <Compile Include="JournalService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SessionService.cs" />
+    <Compile Include="TaskService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

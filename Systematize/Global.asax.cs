@@ -43,6 +43,8 @@ namespace Systematize
                 JsConfig.DateHandler = DateHandler.ISO8601;
                 LogManager.LogFactory = new Log4NetFactory();
                 container.RegisterAutoWired<JournalService>();
+                container.RegisterAutoWired<SessionService>();
+                container.RegisterAutoWired<TaskService>();
                 ConfigureAndSeedSqlLiteDataBase(container);
 
                 LogManager.GetLogger(typeof(SystematizeAppHost)).Debug("AppHost has started... (way to go copying kgobel)");
