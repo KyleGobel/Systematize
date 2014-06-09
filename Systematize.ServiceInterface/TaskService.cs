@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Systematize.ServiceModel;
 using ServiceStack;
@@ -41,6 +42,29 @@ namespace Systematize.ServiceInterface
                     
                     throw;
                 }
+            }
+        }
+
+        public object Delete(DeleteTask message)
+        {
+            using (var db = _connectionFactory.Open())
+            {
+                var task = db.Select<Task>(x => x.SessionId == message.SessionId && x.Id == message.TaskId);
+
+                if (task == null)
+                    return new HttpResult() {StatusCode = HttpStatusCode.NotFound};
+
+                try
+                {
+                    db.Delete(task);
+                }
+                catch (Exception)
+                {
+                    
+                    throw;
+                }
+
+                return this.Get(new Tasks() {SessionId = message.SessionId});
             }
         }
     }

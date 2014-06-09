@@ -105,7 +105,7 @@ function mainController($scope, $http) {
     };
     
     $scope.deleteTask = function(id) {
-        $http.delete('/tasks/' + id)
+        $http.delete('/tasks/1/' + id)
             .success(function(data) {
                 $scope.tasks = data;
                 console.log(data);

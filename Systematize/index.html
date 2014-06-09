@@ -80,7 +80,7 @@
         </thead>
         <tbody>
             <tr ng-repeat="session in sessions">
-                <td class="text-center"><span id="{{session._id}}" class="glyphicon glyphicon-unchecked"></span></td>
+                <td class="text-center"><span id="{{session.id}}" class="glyphicon glyphicon-unchecked"></span></td>
                 <td>Complete the task app</td>
                 <td>{{session.name}} - {{session.createdAt | date: 'MM/dd/yyyy hh:mm a' }}</td>
                 <td class="text-center">
@@ -129,10 +129,10 @@
                             <td style='text-align: center'><button type='button' class='btn btn-sm btn-danger' ng-click='cancelTaskAdd()'><span class='glyphicon glyphicon-remove'></span></button>                                     </td>
                         </tr>
                         <tr ng-repeat="task in tasks">
-                            <td class="text-center"><span id="{{task._id}}" class="glyphicon glyphicon-unchecked"></span></td>
-                            <td id="task-value-{{task._id}}">{{task.description}}</td>
-                            <td class="text-center"><a href="javascript:void();" ng-click="editTask(task._id)" title="Edit Task"><span class="glyphicon glyphicon-edit"></span></a></td>
-                            <td class="text-center"><a href="javascript:void();" ng-click="deleteTask(task._id)" title="Delete Task"><span class="glyphicon glyphicon-remove"></span></a></td>
+                            <td class="text-center"><span id="{{task.id}}" class="glyphicon glyphicon-unchecked"></span></td>
+                            <td id="task-value-{{task.id}}">{{task.description}}</td>
+                            <td class="text-center"><a href="javascript:void();" ng-click="editTask(task.id)" title="Edit Task"><span class="glyphicon glyphicon-edit"></span></a></td>
+                            <td class="text-center"><a href="javascript:void();" ng-click="deleteTask(task.id)" title="Delete Task"><span class="glyphicon glyphicon-remove"></span></a></td>
                         </tr>
 
                     </tbody>

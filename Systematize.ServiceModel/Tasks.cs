@@ -15,4 +15,11 @@ namespace Systematize.ServiceModel
         public string Description { get; set; }
     }
 
+    [Route("/tasks/{SessionId}/{TaskId}", "DELETE")]
+    public class DeleteTask
+    {
+        public long SessionId { get; set; }
+        public long TaskId { get; set; }
+    }
+
 }
